@@ -1,6 +1,26 @@
 // JS Questions:
 
+// What is a callback function?
+A callback is a function that is passed as an argument to another function and is executed after
+its parent function has completed.
+
 // Explain event delegation
+Event delegation allows you to avoid adding event listeners to specific nodes; instead,
+the event listener is added to one parent. That event listener analyzes bubbled events to find a match on child elements.
+
+Here's a very basic JavaScript snippet which illustrates event delegation:
+
+// Get the element, add a click listener...
+document.getElementById("parent-list").addEventListener("click", function(e) {
+  // e.target is the clicked element!
+  // If it was a list item
+  if(e.target && e.target.nodeName == "LI") {
+    // List item found!  Output the ID!
+    console.log("List item ", e.target.id.replace("post-", ""), " was clicked!");
+  }
+});
+
+
 // Explain how this works in JavaScript
 // Explain how prototypal inheritance works
 // What do you think of AMD vs CommonJS?
