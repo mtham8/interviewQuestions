@@ -39,7 +39,8 @@ OOP Pros: It's easy to understand the basic concept of objects and east to inter
 and imperative style rather than a declarative style, which reads like a straight-forward set of instructions for the computer to follow.
 
 OOP Cons: OOP typically depends on shared state. Object and behaviors are typically tacked together on the same entity, which may be
-accessed at random by any number of functions with non-determinstic order, which may lead to undesirable behavior such as race conditions.
+accessed at random by any number of functions with non-determinstic order, which may lead to undesirable behavior such as race conditions -
+different things competing for the same resources.
 
 FP Pros: Using the functional paradigm, programmers avoid any shared state or side-effects, which eliminates bugs caused by multiple
 functions competing for the same resources. With features such as the availability of point-free style, functions tend to be radically
@@ -52,26 +53,84 @@ optimization, even allow you to replace entire algorithms with more efficient on
 Computation that makes use of pure functions are also easy to scale across multiple processors, or across distributed computing clusters
 without fear of threading resource conflicts, race conditions, etc.
 
+FP Cons: Over exploitaton of FP features such as point-free style and large compositions can potentially reduce readability because the
+resulting code is often more abstractly specified, more terse, and less concrete.
+
+Highly OOP codebase can be extremely resistant to change and very brittle compared to an equivalent FP codebase.
+Immutability gives rise to an extremely accessible and malleable program state history, allowing for easy addition of features like inifinite
+undo/redo, rewind/replay, time-travel debugging. Immutability can be achieved in either paradigm, but a proliferation of shared stateful object
+complicates the implementation in OOP.
+
 */
 
 /*
 * When is classical inheritance an appropriate choice?
+
+Never* favor object composition over class inheritance.
+
 */
 
 /*
 * When is prototypal inheritance an appropriate choice?
+
+When you need to compose objects from multiple sources.
+Delegation: the protype chain
+Concatenative: mixins, 'Object.assign()'
+Functional: a function used to create a closure for private state/encapsulation
+
+Each type of prototypal inheritance has its own set of use-cases, but all of them are equally useful in their ability to enable
+composition, which creates has-a or uses-a or can-do relationships as opposed to the is-a relationship created with class inheritance.
+
 */
 
 /*
 * What does "favor object composition over class inheritance" mean?
+
+It means that code reuse should be acheived by assembling smaller units of functionality into new objects instead of inheriting
+from classes and creating object taxonomies.
+In other words, use can-do, has-a, or uses-a relationships instead of is-a relationships.
+Avoid class hierarchies, brittle base class problem, tight coupling, rigid taxonomy, gorilla banana problem, make code more flexible
+
 */
 
 /*
 * What are two-way data binding and one-way data flow, and how are they different?
+
+Two way data binding means that UI fields are bound to model data dynamically such that when a UI field changes, the model data
+changes with it and vice-versa.
+
+One way data flow means that the model is the single souce of truth. Changes in the UI trigger messages that signal user intent to the
+model (or 'store' in React). Only the model has the access to change the app's state. The effect is that data always flows in a single
+direction, which makes it easier to understand.
+
+One way data flows are deterministic, whereas two-way binding can cause side-effects which are harder to follow and understand.
+
+React is an example of one-way data flow. Angular uses two-way binding.
+
 */
 
 /*
 * What are the pros and cons of monolithic and microservice architectures?
+
+A monolithic architecture means that your app is written in one cohesive unit of code whose components are designed to work together,
+sharing the same memory space and resouces.
+
+A microservice architecture means that your app is made of lots of smaller, independent applications capable of running in their own memory
+space and scaling independently from each other across potentially many seperate machines.
+
+Monolithic Pros: A major advantage of the monolitic architecture is that more apps typically have a large number of cross-cutting concerns, such
+as logging, rate limiting, and security features such audit trails and DOS protection. When everything is running through the same app, it's
+easy to hook up components to those cross-cutting concerns. There can also be performance advantages, since shared-memory access is faster
+than inter-process communication (IPC).
+
+Monolithic Cons: Monolithic app services tend to get tightly coupled and entangles as the application evolves, making it difficult to
+isolate services for purposes such as independent scaling or code maintainability. Monolitic architectures are also harder to understand,
+because there are so many dependencies, side-effects, and magic which are not obvious when you're looking at a particulaer service or controller.
+
+Microservice Pros: Microservice architectures are typically better organized, since each microservice has a very specific job, and is not
+concerned with the jobs of other components. Decoupled services are also easier to recompose and reconfigure to serve the purposes of different
+apps (for examply, serving both the web clients and public API). They can also have performance advantages depending on how they're
+organized because it's possible to isolate hot services and scale them independent from the rest of the app.
 */
 
 /*
