@@ -1,19 +1,25 @@
 // JS Questions:
 
 // What is a callback function?
+/*
   A callback is a function that is passed as an argument to another function and is executed after
   its parent function has completed.
+*/
 
 // Explain event delegation
+/*
   Event delegation allows you to avoid adding event listeners to specific nodes; instead, the event
   listener is added to one parent. That event listener analyzes bubbled events to find a match on child elements.
+*/
 
 // Explain how this works in JavaScript
-  // http://stackoverflow.com/questions/3127429/how-does-the-this-keyword-work
+/*
+  http://stackoverflow.com/questions/3127429/how-does-the-this-keyword-work
   this always refers to and holds the value of an object and is usually used inside a function or a method, but can
   also be used outside a function in the global scope.
   this is not assigned a value until an object invokes the function where this is defined. (call site vs call stack)
   the value this is assigned to is based exclusively on the object that invokes the function
+*/
 
 // Explain how prototypal inheritance works
 
@@ -71,6 +77,7 @@
 
 // Make this work:
 // duplicate([1,2,3,4,5]); // [1,2,3,4,5,1,2,3,4,5]
+const duplicate = array => newArray = array.map(a => a).concat(array);
 
 // Why is it called a Ternary expression, what does the word "Ternary" indicate?
 
