@@ -131,8 +131,38 @@ Microservice Pros: Microservice architectures are typically better organized, si
 concerned with the jobs of other components. Decoupled services are also easier to recompose and reconfigure to serve the purposes of different
 apps (for examply, serving both the web clients and public API). They can also have performance advantages depending on how they're
 organized because it's possible to isolate hot services and scale them independent from the rest of the app.
+
+Microservice Cons: As you're building a new microservice architecture, you'll likely to discover lots of cross-cutting concerns that you didn't
+anticipate at design time. A monolithic app could establish shared magic helpers or middleware to handle such cross-cutting concerns without much effort.
+In a microservice architecture, you'll either need to incur the overhead of separate modules for each cross-cutting concern, or encapsulate cross-
+cutting concerns with another service layer that all traffic gets routed through.
+
+Eventually, even monolithic architectures tend to route traffic through an outer service layer for cross-cutting concerns, but with a
+monolithic archtecture, it's possible to delay the cost of that work until the project is much more mature. Microservices are frequently
+deployed on their own virtual machines or containers, causing proliferation of VM wrangling work. These tasks are frequently automated
+with container fleet management tools.
+
+Good: Positive attitudes towards microservices, despite the higher initial cost vs monolithic apps. Aware that microservices tend to perform
+and scale better in the long run. Practical about microservices vs monolithic apps. Structure the app so that services are independent from each
+other at the code level, but easy to bundle together as monolithic app in the beginning. Microservice overhead costs can be delayed until it
+becomes more practical to pay the price. Decouple monolithic apps such that they're easy to split into microservices when the time comes.
+
 */
 
 /*
 * What is asynchronous programming, and why is it important in JavaScript?
+
+Synchronous programming means that, barring conditionals and function calls, code is executed sequentially from top-to-bottom, blocking on long-running
+tasks such as network requests and disk I/O.
+
+Asynchronous programming means that the engine runs in an event loop. When a blocking operation is needed, the request is started, and the code
+keeps running without blocking for the result. When the response is ready, an interrupt is fired, which causes an event handler to be run,
+where the control flow continues. In this way, a single program thread can handle many concurrent operations.
+
+User interfaces are asynchronous by nature, and spend most of their time waiting for user input to interrupt the event loop and trigger
+event handlers.
+
+Node is asynchronous by default, meaning that the server works in much the same way, waiting in a loop for a network request, and accepting
+more incoming requests while the first one is being handled. This is important in JavaScript, because it is a very natural fit for user
+interface code, and very beneficial to performance on the server.
 */
